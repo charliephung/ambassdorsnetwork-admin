@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Ambassador admin</title>
+	<link rel="stylesheet" href="./css/style.css">
+	<!-- Google fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<ul class="navbar navbar-light" id="navId">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+		 aria-expanded="false" aria-label="Toggle navigation">
+			<span id="brand">
+				<i class="fa fa-user-circle-o" aria-hidden="true"> Ambassador admin
+					<strong>
+						<span id="username"></span>
+					</strong>
+				</i>
+			</span>
+
+		</button>
+		<button id="logout" type="button" class="btn btn-sm btn-danger">Logout</button>
+	</ul>
+	<br>
+	<div id="loginForm" class="row">
+		<div class="container">
+			<form id="form" method="POST" role="form">
+				<div class="alert alert-danger">
+					<strong id="alert"></strong>
+				</div>
+				<legend id="login-header">Login</legend>
+				<div class="form-group">
+					<label for="">Email</label>
+					<input type="email" class="form-control" id="email" required placeholder="Email...">
+				</div>
+				<div class="form-group">
+					<label for="">Password</label>
+					<input type="password" class="form-control" id="password" required placeholder="Password...">
+				</div>
+				<button id="login-button" type="submit" class="btn btn-block btn-primary">Login</button>
+			</form>
+
+		</div>
+	</div>
+
+	<div id="main" class="container-fluid">
+		<div class="row">
+			<div class="col-2">
+				<section class="section-tools">
+					<div class="list-group">
+						<button type="button" value="upload" class="list-group-item list-group-item-action active">UPLOAD POST</button>
+						<button type="button" value="post" class="list-group-item list-group-item-action ">MANAGE POST</button>
+						<button type="button" value="news" class="list-group-item list-group-item-action ">MANAGE NEWS</button>
+						<button type="button" value="users" class="list-group-item list-group-item-action ">MANAGE USERS</button>
+					</div>
+				</section>
+			</div>
+			<div class="col-10">
+				<section class="section-post">
+					<div class="contain">
+						<!-- Upload form and show posts -->
+						<div class="post__upload">
+							<div class="row">
+								<div class="col-6">
+									<form class="post__form" id="post__form" method="POST" role="form">
+										<legend>Upload Post</legend>
+										<div class="form-group">
+											<input type="email" class="form-control" id="post__email" required placeholder="Email...">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" id="post__author" required placeholder="Author...">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" id="post__heading" required placeholder="Heading...">
+										</div>
+										<div class="form-group">
+											<textarea rows="4" type="text" class="form-control" id="post__content" required placeholder="Content..."></textarea>
+										</div>
+										<div class="form-group">
+											<div class="form-inline">
+												<input type="date" class="form-control" id="post__date" required> &nbsp;
+												<input type="time" class="form-control" id="post__time" required>
+											</div>
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" id="post__image" required placeholder="Post image url...">
+										</div>
+										<button type="submit" class="btn btn-primary">Submit</button>
+										<div class="post__form__background" id="post__form__background">
+											<h1 class="message__success">Success</h1>
+											<h1 class="message__fail">fail</h1>
+											<div id="spinner" class="spinner">
+												<div class="rect1"></div>
+												<div class="rect2"></div>
+												<div class="rect3"></div>
+												<div class="rect4"></div>
+												<div class="rect5"></div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="col-6">
+									<form id="image-gallery__form" class="form-inline" method="POST" role="form">
+										<div class="form-group ">
+											<input type="file" class="form-control-file" id="image-gallery__image">
+										</div>
+										<div class="form-group ">
+											<button type="submit" class="btn btn-sm btn-primary">upload</button>
+										</div>
+										<div id="image-gallery__form__background"></div>
+									</form>
+									<br>
+									<div id="image-gallery">
+
+									</div>
+								</div>
+								<!-- Show uploaded post -->
+							</div>
+							<br>
+							<div class="row">
+								<div id="post__uploaded" class="col-12">
+									<!-- Show post -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Manage posts -->
+					<div class="contain">
+						<div id="post__manage">
+							<!-- <table/>-->
+						</div>
+					</div>
+					<!-- Manage news  -->
+					<div class="contain">
+						<div id="news">
+							<div class="row">
+								<div class="col-7">
+									<form id="news__form">
+										<legend>News</legend>
+										<div class="form-group">
+											<textarea class="form-control" type="text" id="news__header" placeholder="Header..."></textarea>
+										</div>
+										<div class="form-group">
+											<textarea rows="7" class="form-control" type="text" id="news__body" placeholder="Body..."></textarea>
+										</div>
+										<div class="form-group">
+											<textarea class="form-control" type="text" id="news__footer" placeholder="Footer..."></textarea>
+										</div>
+										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+										<div id="news__form__background">
+											<h1 class="message__success">Success</h1>
+											<h1 class="message__fail">fail</h1>
+											<div id="spinner" class="spinner">
+												<div class="rect1"></div>
+												<div class="rect2"></div>
+												<div class="rect3"></div>
+												<div class="rect4"></div>
+												<div class="rect5"></div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="col-5">
+									<div id="news__preview">
+										<div id="news__preview__header">
+										</div>
+										<div id="news__preview__body">
+										</div>
+										<div id="news__preview__footer">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="contain">
+						<div id="users">
+							<div class="row">
+								<div id="user__left" class="col-4">
+									<form id="user__form">
+										<legend id="user__form__name"></legend>
+										<div class="form-group">
+											<input id="user__email" class="form-control" type="email" placeholder="Email...">
+										</div>
+										<div class="form-group hidden">
+											<input id="user__id" class="hidden" type="text">
+										</div>
+										<div class="form-group">
+											<input id="user__name" class="form-control" type="text" placeholder="Name...">
+										</div>
+										<div class="form-group">
+											<input id="user__address" class="form-control" type="text" placeholder="Address...">
+										</div>
+										<div class="form-group">
+											<input id="user__interest" class="form-control" type="text" placeholder="Area of interest...">
+										</div>
+										<div class="form-group">
+											<input id="user__image" type="file" class="form-control" placeholder="File...">
+										</div>
+										<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+
+										<div id="users__form__background">
+											<h1 class="message__success">Success</h1>
+											<h1 class="message__fail">fail</h1>
+											<div id="spinner" class="spinner">
+												<div class="rect1"></div>
+												<div class="rect2"></div>
+												<div class="rect3"></div>
+												<div class="rect4"></div>
+												<div class="rect5"></div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div id="user__right" class="col-12">
+									<table class="table table-inverse ">
+										<thead class="thead-dark">
+											<tr>
+												<th>Profile</th>
+												<th>Email</th>
+												<th>Name</th>
+												<th>Number of Posts</th>
+												<th>Ambassadors</th>
+												<th>Edit</th>
+											</tr>
+										</thead>
+										<tbody id="user__tbody">
+											<tr>
+												<td scope="row"></td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td scope="row"></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div id="popup">
+			<div id="popup__window">
+				<span id="popup__close">X</span>
+				<div id="popup__content">
+					sdfsdfsdfsdf
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	 crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	 crossorigin="anonymous"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyCAvP-idR8Fk4Ru1s7mUlZIjYvf42aq3OQ",
+			authDomain: "ambassadorsnetwork-f2db0.firebaseapp.com",
+			databaseURL: "https://ambassadorsnetwork-f2db0.firebaseio.com",
+			projectId: "ambassadorsnetwork-f2db0",
+			storageBucket: "gs://ambassadorsnetwork-f2db0.appspot.com/",
+			messagingSenderId: "563246719556"
+		};
+		firebase.initializeApp(config);
+	</script>
+	</script>
+	<script src="./js/authenticate.js"></script>
+	<script src="./js/functions/upload/upload.js"></script>
+	<script src="./js/display.js"></script>
+
+	<script src="./js/components/App.js"></script>
+	<script src="./js/components/CardPost.js"></script>
+	<script src="./js/components/TablePost.js"></script>
+	<script src="./js/components/CardNews.js"></script>
+	<script src="./js/components/TableUsers.js"></script>
+
+
+	<script src="./js/functions/myFunc.js"></script>
+	<script src="./js/functions/tableUsers/index.js"></script>
+	<script src="./js/functions/tablePost/index.js"></script>
+	<script src="./js/functions/cardNews/index.js"></script>
+	<script src="./js/functions/cardPost/index.js"></script>
+
+	<script src="./js/index.js"></script>
+</body>
+
+</html>
