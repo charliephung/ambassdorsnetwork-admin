@@ -58,6 +58,42 @@ postForm.addEventListener("submit", e => {
 	});
 });
 
+let addForm = document.getElementById("user__addForm");
+addForm.addEventListener("submit", e => {
+	e.preventDefault();
+	firebase.auth().onAuthStateChanged(function (user) {
+		if (user) {
+			let ambassadorEmail = getValue("user__addForm__email"),
+				ambassadorName = getValue("user__addForm__name");
+
+			let firebasePost = firebase.database().ref("/data");
+			firebasePost.once('value', function (data) {
+				let dataValue = data.val();
+				let found = null;
+				found = Object.keys(dataValue).find(ele => {
+					return dataValue[ele].email === ambassadorEmail;
+				});
+				if (!found) {
+					let dataId = firebase.database().ref().child("/data").push().key;
+					// Create new data
+					firebase.database().ref(`/data/${dataId}`).set({
+						email: ambassadorEmail,
+						name: ambassadorName,
+						ambassador: false
+					});
+					addForm.reset();
+				} else {
+					alert(`${ambassadorEmail} already exist!`);
+				}
+
+			});
+
+		}
+	});
+});
+
+
+
 // Save data to firebase
 function saveData(sentData) {
 	// Check for user 
@@ -93,7 +129,6 @@ function saveData(sentData) {
 		}
 	});
 }
-
 function writeData(sentData) {
 	// Generate new data id
 	let dataId = firebase.database().ref().child("/data").push().key;

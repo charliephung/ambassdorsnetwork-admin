@@ -261,7 +261,11 @@ body {
 	padding: 1rem;
 	box-shadow: 0rem 0rem .5rem rgba(0, 0, 0, .2);
 	border-radius: 5px;
-	position: relative;
+	position: fixed;
+	width: 20%;
+	z-index: 100;
+	left: 11%;
+	background-color: #fff;
 }
 
 #user__left {

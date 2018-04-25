@@ -7,7 +7,9 @@ let userForm = document.getElementById("user__form"),
 	userAddress = document.getElementById("user__address"),
 	userImage = document.getElementById("user__image"),
 	userTBody = document.getElementById("user__tbody"),
+	deleteImageButton = document.getElementsByClassName("deleteImage"),
 	userFormBackground = document.getElementById("users__form__background");
+
 
 // Edit user
 let userLeft = document.getElementById("user__left"),
@@ -22,19 +24,59 @@ function addEventEditUser() {
 				userLeft.style.display = "none"
 				userRight.className = "col-12";
 				userForm.reset();
+
+				// show all other edit button
+				for (let j = 0; j < editButton.length; j++) {
+					editButton[j].style.display = "inline-block";
+					editButton[i].parentNode.parentNode.style.backgroundColor = "#fff";
+				}
 			} else {
 				userLeft.style.display = "block";
-				userRight.className = "col-6";
+				userRight.className = "col-10";
 
+				// Hide all other edit button
+				for (let j = 0; j < editButton.length; j++) {
+					if (i !== j) {
+						editButton[j].style.display = "none";
+					}
+				}
+				// Highlight editing
+				editButton[i].parentNode.parentNode.style.backgroundColor = "rgba(0, 200, 81, .5)";
+
+				// Get value from input
 				userId.value = editButton[i].parentNode.parentNode.cells[0].textContent;
 				userName.value = editButton[i].parentNode.parentNode.cells[3].textContent;
 				userEmail.value = editButton[i].parentNode.parentNode.cells[2].textContent;
 				userAddress.value = editButton[i].parentNode.parentNode.cells[4].textContent;
 				userInterest.value = editButton[i].parentNode.parentNode.cells[6].textContent;
 				userFormName.innerText = `${editButton[i].parentNode.parentNode.cells[3].textContent}'s Profile`;
+
+				// Check for ambassador current image
+				let firebaseData = firebase.database().ref("/data");
+				firebaseData.once('value', function (data) {
+					let dataValue = data.val();
+					if (dataValue[userId.value].profile) {
+						// IF user has image replace input by delete button
+						deleteImageButton[0].style.display = "inline-block";
+						userImage.style.display = "none";
+						deleteImageButton[0].addEventListener("click", () => deleteImage(userId.value));
+
+					} else {
+						userImage.style.display = "inline-block";
+						deleteImageButton[0].style.display = "none";
+					}
+
+				});
 			}
 		});
 	}
+}
+function deleteImage(id) {
+	// Find user id then delete image
+	let imageRef = firebase.database().ref().child(`/data/${id}/profile`);
+	imageRef.remove();
+	userImage.style.display = "inline-block";
+	deleteImageButton[0].style.display = "none";
 }
 // User submit profile
 // Uploading new post to database 
@@ -195,4 +237,3 @@ function addEventDeleteUser() {
 		});
 	}
 }
-

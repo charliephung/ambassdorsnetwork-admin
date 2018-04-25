@@ -4,6 +4,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 		let firebaseDatas = firebase.database().ref();
 		firebaseDatas.on('value', function (data) {
 			let dataValue = data.val();
+			console.log("reloaded");
+			
 			setTimeout(() => {
 				CardPost(postUploaded);
 				TableUsers(userTBody);
