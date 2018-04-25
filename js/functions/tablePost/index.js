@@ -59,6 +59,9 @@ function toggleStatus(button, key, value) {
 		button[i].addEventListener("click", () => {
 			let authorId = button[i].parentNode.parentNode.cells[1].textContent,
 				postId = button[i].parentNode.parentNode.cells[2].textContent;
+			console.log(authorId);
+			console.log(postId);
+			
 			togglePost = firebase.database().ref().child(`/data/${authorId}/post/${postId}/status`);
 			// Update postStatus on newsAndEvents
 			togglePost.update({

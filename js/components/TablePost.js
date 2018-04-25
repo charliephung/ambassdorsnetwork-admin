@@ -63,9 +63,11 @@ const TablePost = (root) => {
 				// Get
 				if (arrData[id].post) {
 					Object.keys(arrData[id].post).map(ele => {
+						
 						tableTd.push({
+							postId: id,
 							id: ele,
-							date: arrData[id].post[ele].date.day + " " + arrData[id].post[ele].date.time,
+							date: arrData[id].post[ele].date.day ? arrData[id].post[ele].date.day : " " + arrData[id].post[ele].date.time ? arrData[id].post[ele].date.time : "",
 							authorEmail: arrData[id].email,
 							authorName: arrData[id].name,
 							author: `${arrData[id].email} ${arrData[id].name}`,
@@ -120,7 +122,7 @@ const TablePost = (root) => {
 						return ` 
 										<tr>
 											<th scope="row" >${ index + 1}</th>
-											<td class="authorKey hidden" >${ id}</td>
+											<td class="authorKey hidden" >${ ele.postId}</td>
 											<td class="postKey hidden" >${ ele.id}</td>
 											<td class="imageUrl hidden" >${ ele.image}</td>
 											<td><p>${ele.date}</p></td>
