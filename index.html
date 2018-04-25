@@ -22,7 +22,7 @@
 <body>
 	<ul class="navbar navbar-light" id="navId">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-		 aria-expanded="false" aria-label="Toggle navigation">
+		aria-expanded="false" aria-label="Toggle navigation">
 			<span id="brand">
 				<i class="fa fa-user-circle-o" aria-hidden="true"> Ambassador admin
 					<strong>
@@ -96,7 +96,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<input type="text" class="form-control" id="post__image"  placeholder="Post image url...">
+											<input type="text" class="form-control" id="post__image" placeholder="Post image url...">
 										</div>
 										<button type="submit" class="btn btn-primary">Submit</button>
 										<div class="post__form__background" id="post__form__background">
@@ -226,6 +226,17 @@
 									</form>
 								</div>
 								<div id="user__right" class="col-12">
+									<form id="user__addForm" class="form-inline" >
+										<div class="form-group">
+											<input type="email" class="form-control" required id="user__addForm__email" placeholder="Email">
+										</div>
+										&nbsp;
+										<div class="form-group">
+											<input type="text" class="form-control" required id="user__addForm__name" placeholder="Name">
+										</div>
+
+										<button type="submit" class="btn btn-sm btn-primary">Add Ambassador</button>
+									</form>
 									<table class="table table-inverse ">
 										<thead class="thead-dark">
 											<tr>
@@ -267,11 +278,11 @@
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	 crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	 crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	 crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
 	<script>
 		// Initialize Firebase
